@@ -13,16 +13,18 @@ class Pembayaran extends Controller
         return view('pembayaran', ['detailPenjualan' => $detailPenjualan]);
     }
 
-    public function prosesBayar()
-    {
-        $totalHarga = $this->request->getPost('totalHarga');
-        $uangBayar = str_replace('.', '', $this->request->getPost('uangBayar')); // Hapus titik agar dapat di-parse sebagai integer
+   public function prosesBayar()
+{
+    $totalHarga = (int) $this->request->getPost('totalHarga');
+    $uangBayar = $this->request->getPost('uangBayar');
+    $uangBayar = (int) preg_replace('/\D/', '', $uangBayar);
 
-        if ($uangBayar < $totalHarga) {
-            return redirect()->back()->with('error', 'Uang tidak cukup untuk melakukan pembayaran');
-        }
-        return redirect()->to('/selesai-bayar');
+    if ($uangBayar < $totalHarga) {
+        return redirect()->back()->with('error', 'Not enough money to make payment');
     }
+
+    return redirect()->to('/selesai-bayar');
+}
 }
 
 ?>

@@ -43,6 +43,7 @@ $routes->post('/penjualan', 'Penjualan::index');
 $routes->get('/penjualan/(:num)', 'Penjualan::cekHarga/$1');
 $routes->get('/bayar', 'Penjualan::formBayar');
 $routes->get('/selesai-bayar', 'Penjualan::bayar');
+$routes->post('pembayaran/prosesBayar', 'Pembayaran::prosesBayar');
 });
 
 
