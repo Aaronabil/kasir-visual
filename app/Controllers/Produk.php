@@ -81,6 +81,21 @@ class Produk extends BaseController
 
         }    
         return view('Produk/form-produk',$data);
-
     }
+
+    public function search() {
+    $keyword = $this->request->getGet('keyword');
+    $model = new Mproduk();
+
+    $data['listProduk'] = $model
+        ->groupStart()
+            ->like('NamaProduk', $keyword)
+            ->orLike('Harga', $keyword)
+            ->orLike('Stok', $keyword)
+            ->orLike('HargaBeli', $keyword)
+        ->groupEnd()
+        ->findAll();
+
+    return $this->response->setJSON($data);
+}
 }

@@ -6,7 +6,7 @@
 <p><a href="<?=site_url('/tambah-pelanggan');?>" class="btn btn-sm btn-primary"><i class="mdi mdi-account-plus m-1"></i>Add Customer</a></p>
 <div class="row mb-3">
     <div class="col-md-6">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search User..." autocomplete="off">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search Customer..." autocomplete="off">
     </div>
 </div>
 <div class="table-responsive">

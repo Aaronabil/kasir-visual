@@ -38,6 +38,7 @@ $routes->post('/tambah-produk', 'Produk::tambahProduk');
 $routes->get('/edit-produk/(:any)', 'Produk::tambahProduk/$1');
 $routes->post('/edit-produk/(:any)', 'Produk::tambahProduk/$1');
 $routes->get('/hapus-produk/(:any)', 'Produk::hapusProduk/$1');
+$routes->get('/produk/search', 'Produk::search');
 
 $routes->group('', ['filter' => 'petugas'], function ($routes) {
 $routes->get('/penjualan', 'Penjualan::index');
