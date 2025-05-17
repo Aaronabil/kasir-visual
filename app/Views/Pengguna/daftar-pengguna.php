@@ -4,6 +4,12 @@
 <?=session()->getFlashdata('pesan');?>
 
 <p><a href="<?=site_url('/tambah-pengguna');?>" class="btn btn-sm btn-primary"><i class="mdi mdi-account-multiple-plus m-1"></i>Add User</a></p>
+<div class="row mb-3">
+    <div class="col-md-6">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search User...">
+    </div>
+</div>
+
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -15,7 +21,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="dataPengguna">
         <?php
         if(isset($listPengguna)) :
             $no=null;
@@ -89,6 +95,49 @@
     });
   });
 </script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+document.getElementById('searchInput').addEventListener('input', function () {
+    const keyword = this.value;
+
+    fetch("<?= site_url('/pengguna/search') ?>?keyword=" + encodeURIComponent(keyword))
+        .then(res => res.json())
+        .then(data => {
+            const tbody = document.getElementById('dataPengguna');
+            tbody.innerHTML = '';
+
+            const list = data.listPengguna;
+
+            if (!list || list.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center">User not found.</td></tr>';
+                return;
+            }
+
+            list.forEach((user, index) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${user.nama}</td>
+                        <td>${user.email}</td>
+                        <td>${user.level}</td>
+                        <td>
+                            <a href="/edit-pengguna/${CryptoJS.MD5(user.email)}" class="m-1" style="text-decoration: none;">
+                                <i class="mdi mdi-account-edit-outline"></i>
+                            </a>
+                            <a href="/hapus-pengguna/${CryptoJS.MD5(user.email)}" class="deleteLink text-danger">
+                                <i class="mdi mdi-alert-outline text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                `;
+            });
+        })
+        .catch(err => {
+            console.error("Fetch error:", err);
+        });
+});
+</script>
+
 
 
 

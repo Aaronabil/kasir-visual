@@ -19,6 +19,7 @@ $routes->post('/tambah-pengguna', 'User::tambahPengguna');
 $routes->get('/edit-pengguna/(:any)', 'User::tambahPengguna/$1');
 $routes->post('/edit-pengguna/(:any)', 'User::tambahPengguna/$1');
 $routes->get('/hapus-pengguna/(:any)', 'User::hapusPengguna/$1');
+$routes->get('/pengguna/search', 'User::search');
 });
 
 #===================Pengelolaan Pengguna==============================

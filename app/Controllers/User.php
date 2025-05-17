@@ -83,6 +83,21 @@ class User extends BaseController
         return redirect()->to('/');
     }
 
+    public function search()
+{
+    $keyword = $this->request->getGet('keyword');
+    $model = new Muser();
+    
+    $data['listPengguna'] = $model
+        ->like('email', $keyword)
+        ->orLike('nama', $keyword)
+        ->orLike('level', $keyword)
+        ->findAll();
+
+     return $this->response->setJSON($data);
+}
+
+
     public function welcome($email){
         $model = new Muser();
         $user = $model->getUserById($email);
