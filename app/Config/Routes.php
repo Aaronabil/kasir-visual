@@ -22,13 +22,14 @@ $routes->get('/hapus-pengguna/(:any)', 'User::hapusPengguna/$1');
 $routes->get('/pengguna/search', 'User::search');
 });
 
-#===================Pengelolaan Pengguna==============================
+#===================Pengelolaan Pelanggan==============================
 $routes->get('/pelanggan', 'Pelanggan::index');
 $routes->get('/tambah-pelanggan', 'Pelanggan::tambahPelanggan');
 $routes->post('/tambah-pelanggan', 'Pelanggan::tambahPelanggan');
 $routes->get('/edit-pelanggan/(:any)', 'Pelanggan::tambahPelanggan/$1');
 $routes->post('/edit-pelanggan/(:any)', 'Pelanggan::tambahPelanggan/$1');
 $routes->get('/hapus-pelanggan/(:any)', 'Pelanggan::hapusPelanggan/$1');
+$routes->get('/pelanggan/search', 'Pelanggan::search');
 
 #===================Pengelolaan Produk==============================
 $routes->get('/produk', 'Produk::index');

@@ -6,7 +6,7 @@
 <p><a href="<?=site_url('/tambah-pengguna');?>" class="btn btn-sm btn-primary"><i class="mdi mdi-account-multiple-plus m-1"></i>Add User</a></p>
 <div class="row mb-3">
     <div class="col-md-6">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search User...">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search User..." autocomplete="off">
     </div>
 </div>
 
@@ -48,97 +48,107 @@
     </table>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+function ucwords(str) {
+    return str.replace(/\b\w/g, c => c.toUpperCase());
+}
+
+// Fungsi untuk delete konfirmasi SweetAlert
+function setupDeleteLinks() {
     const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: "btn btn-lg btn-primary m-1",
-        cancelButton: "btn btn-lg btn-danger"
-      },
-      buttonsStyling: false
+        customClass: {
+            confirmButton: "btn btn-lg btn-primary m-1",
+            cancelButton: "btn btn-lg btn-danger"
+        },
+        buttonsStyling: false
     });
 
     document.querySelectorAll('.deleteLink').forEach(function(element) {
-      element.addEventListener('click', function(event) {
-        event.preventDefault();
-        const href = this.getAttribute('href');
-        
-        swalWithBootstrapButtons.fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "No, cancel!",
-          reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
+        element.addEventListener('click', function(event) {
+            event.preventDefault();
+            const href = this.getAttribute('href');
+
             swalWithBootstrapButtons.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-              padding: '2em',
-            }).then(() => {
-              window.location.href = href;
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success",
+                        padding: '2em',
+                    }).then(() => {
+                        window.location.href = href;
+                    });
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    swalWithBootstrapButtons.fire({
+                        title: "Cancelled",
+                        text: "Your data is safe :)",
+                        icon: "error",
+                        padding: '2em',
+                    });
+                }
             });
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire({
-              title: "Cancelled",
-              text: "Your data is safe :)",
-              icon: "error",
-              padding: '2em',
-            });
-          }
+            document.querySelector('.swal2-icon').style.marginTop = '20px'; // Atur margin atas sesuai kebutuhan
         });
-        document.querySelector('.swal2-icon').style.marginTop = '20px'; // Atur margin atas sesuai kebutuhan
-      });
     });
-  });
-</script>   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-<script>
-document.getElementById('searchInput').addEventListener('input', function () {
-    const keyword = this.value;
+}
 
-    fetch("<?= site_url('/pengguna/search') ?>?keyword=" + encodeURIComponent(keyword))
-        .then(res => res.json())
-        .then(data => {
-            const tbody = document.getElementById('dataPengguna');
-            tbody.innerHTML = '';
+document.addEventListener('DOMContentLoaded', function () {
+    setupDeleteLinks();
 
-            const list = data.listPengguna;
+    // Search realtime
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const keyword = this.value;
 
-            if (!list || list.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center">User not found.</td></tr>';
-                return;
-            }
+        fetch("<?= site_url('/pengguna/search') ?>?keyword=" + encodeURIComponent(keyword))
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.getElementById('dataPengguna');
+                tbody.innerHTML = '';
 
-            list.forEach((user, index) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${user.nama}</td>
-                        <td>${user.email}</td>
-                        <td>${user.level}</td>
-                        <td>
-                            <a href="/edit-pengguna/${CryptoJS.MD5(user.email)}" class="m-1" style="text-decoration: none;">
-                                <i class="mdi mdi-account-edit-outline"></i>
-                            </a>
-                            <a href="/hapus-pengguna/${CryptoJS.MD5(user.email)}" class="deleteLink text-danger">
-                                <i class="mdi mdi-alert-outline text-danger"></i>
-                            </a>
-                        </td>
-                    </tr>
-                `;
+                const list = data.listPengguna;
+
+                if (!list || list.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center">User not found.</td></tr>';
+                    return;
+                }
+
+                list.forEach((user, index) => {
+                    const emailHash = CryptoJS.MD5(user.email).toString();
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${ucwords(user.nama)}</td>
+                            <td>${user.email}</td>
+                            <td>${ucwords(user.level)}</td>
+                            <td>
+                                <a href="/edit-pengguna/${emailHash}" class="m-1" style="text-decoration: none;">
+                                    <i class="mdi mdi-account-edit-outline"></i>
+                                </a>
+                                <a href="/hapus-pengguna/${emailHash}" class="deleteLink text-danger">
+                                    <i class="mdi mdi-alert-outline text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                // Penting: Setup ulang delete link setelah isi tabel diganti
+                setupDeleteLinks();
+            })
+            .catch(err => {
+                console.error("Fetch error:", err);
             });
-        })
-        .catch(err => {
-            console.error("Fetch error:", err);
-        });
+    });
 });
 </script>
-
-
-
-
 <?=$this->endSection();?>

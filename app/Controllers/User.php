@@ -83,8 +83,7 @@ class User extends BaseController
         return redirect()->to('/');
     }
 
-    public function search()
-{
+    public function search(){
     $keyword = $this->request->getGet('keyword');
     $model = new Muser();
     
@@ -95,7 +94,7 @@ class User extends BaseController
         ->findAll();
 
      return $this->response->setJSON($data);
-}
+    }
 
 
     public function welcome($email){

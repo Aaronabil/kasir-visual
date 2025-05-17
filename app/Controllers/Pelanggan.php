@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\Mpelanggan;
 
 class Pelanggan extends BaseController
 {
@@ -56,6 +57,17 @@ class Pelanggan extends BaseController
         return redirect()->to(site_url('/pelanggan'))->with('pesan','<div class="alert alert-danger">Customer data has been successfully deleted</div>');
     }
 
+    public function search(){
+    $keyword = $this->request->getGet('keyword');
+    $model = new Mpelanggan();
+    
+    $data['listPelanggan'] = $model
+        ->like('NamaPelanggan', $keyword)
+        ->orLike('Alamat', $keyword)
+        ->orLike('NomorTelepon', $keyword)
+        ->findAll();
 
+     return $this->response->setJSON($data);
+    }
 
 }
