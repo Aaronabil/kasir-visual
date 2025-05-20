@@ -405,10 +405,10 @@
       new Chart(leaveReportCanvas, {
         type: 'bar',
         data: {
-          labels: ["Jan","Feb", "Mar", "Apr", "May"],
+          labels: ["Jan","Feb", "Mar", "Apr", "May", "June", "July", "August", "October", "November", "December"],
           datasets: [{
               label: 'Last week',
-              data: [0, 1, 0, 0, 0],
+              data: [0, 205, 194, 102, 24],
               backgroundColor: "#52CDFF",
               borderColor: [
                   '#52CDFF',

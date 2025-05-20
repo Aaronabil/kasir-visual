@@ -31,7 +31,7 @@
 <div class="form-group row">
     <label for="txtStokProduk" class="col-md-3">Product Inventory (Stock) </label>
     <div class="col-md-9">
-        <input type="text" id="txtStokProduk" name="txtStokProduk" class="form-control uang" value="<?=isset($detailProduk[0]['Stok']) ? $detailProduk[0]['Stok'] : null;?>" placeholder="Enter stock items" autocomplete="off"/>
+        <input type="text" id="txtStokProduk" name="txtStokProduk" class="form-control uang" value="<?=isset($detailProduk[0]['Stok']) ? $detailProduk[0]['Stok'] : null;?>" placeholder="Enter stock items" autocomplete="off" required/>
     </div>
 </div>
 

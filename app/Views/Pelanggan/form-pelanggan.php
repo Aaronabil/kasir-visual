@@ -16,7 +16,7 @@
 <div class="form-group row">
     <label for="txtNoTelpPelanggan" class="col-md-3"> Customer Telephone Number</label>
     <div class="col-md-9">
-        <input type="text" id="txtNoTelpPelanggan" name="txtNoTelpPelanggan" class="form-control" placeholder="Enter telephone number"  <?=isset($detailPelanggan[0]['NomorTelepon']) ? 'autofocus' :null;?>  autocomplete="off" value="<?=isset($detailPelanggan[0]['NomorTelepon']) ? $detailPelanggan[0]['NomorTelepon'] : null;?>" required/>
+        <input type="number" id="txtNoTelpPelanggan" name="txtNoTelpPelanggan" class="form-control" placeholder="Enter telephone number"  <?=isset($detailPelanggan[0]['NomorTelepon']) ? 'autofocus' :null;?>  autocomplete="off" value="<?=isset($detailPelanggan[0]['NomorTelepon']) ? $detailPelanggan[0]['NomorTelepon'] : null;?>" required/>
     </div>
 </div>
 
