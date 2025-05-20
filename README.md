@@ -84,3 +84,15 @@ open a browser then access the URL http://localhost:8080/ then the program will 
 
 ## Customer Page
 ![Customer Page](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict4.jpg?raw=true)
+
+## Product Page
+![Product Page](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict5.jpg?raw=true)
+
+## Sale Page
+![Sale Page](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict8.jpg?raw=true)
+
+## Income Page
+![Income Page](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict6.jpg?raw=true)
+
+## Stock Report Page
+![Stock Report Pagw](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict7.jpg?raw=true)
