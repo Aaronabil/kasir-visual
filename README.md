@@ -74,7 +74,7 @@ This application was created using several technologies, including:
 ## Open the program
 open a browser then access the URL http://localhost:8080/ then the program will appear like this:
 ### Login Page
-![Login Page](https://github.com/ophari/to_do_list_laravel-filament/blob/main/public/images/login.png?raw=true)
+![Login Page](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict1.jpg?raw=true)
 
 ## Dashboard Page
 ![Dashboard Page](https://github.com/ophari/to_do_list_laravel-filament/blob/main/public/images/dashboard.png?raw=true)
