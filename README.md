@@ -77,10 +77,10 @@ open a browser then access the URL http://localhost:8080/ then the program will 
 ![Login Page](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict1.jpg?raw=true)
 
 ## Dashboard Page
-![Dashboard Page](https://github.com/ophari/to_do_list_laravel-filament/blob/main/public/images/dashboard.png?raw=true)
+![Dashboard Page](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict2.jpg?raw=true)
 
-## Categories Page
-![Categories Page](https://github.com/ophari/to_do_list_laravel-filament/blob/main/public/images/category.png?raw=true)
+## User Page
+![User Page](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict3.jpg?raw=true)
 
-## Task Page
-![Task Page](https://github.com/ophari/to_do_list_laravel-filament/blob/main/public/images/task.png?raw=true)
+## Customer Page
+![Customer Page](https://github.com/Aaronabil/kasir-visual/blob/main/public/pict4.jpg?raw=true)
